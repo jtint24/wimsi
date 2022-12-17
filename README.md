@@ -20,7 +20,7 @@ A tool to build Jotted maps for practically any topic. This includes grouped, co
   - [x] Pull related Wikipedia articles
   - [ ] Mirror articles that redirect to each other
   - [x] Construct graph using BFS of topics
-- [ ] Map Extracton
+- [ ] Map Extraction
   - [x] Find discovery tree of graph
   - [ ] Enhance discovery time calculation with semantic similarity to root node
 - [ ] Sourcing
