@@ -80,9 +80,7 @@ class ProximityTree:
 
 
 def printCSV(vec):
-    for i in vec[0:len(vec)-1]:
-        print(i, end=", ")
-    print(vec[len(vec)-1])
+    print(vec.toString())
     
 def distance(A, B):
     sqSum = 0
@@ -95,8 +93,13 @@ def balanceOrderProxTree(values):
     if len(values) == 0:
         return []
     meanPoint = getMeanPoint(values)
-    centralPoint = getClosestTo(meanPoint, values)
-    # print("centralPoint: "+str(centralPoint))
+    centralPoint = values[0]
+    for _ in range(0,10):
+      antipodeA = getFarthestFrom(centralPoint, values)
+      antipodeB = getFarthestFrom(antipodeA, values)
+      centralPoint = getInBetween(antipodeA, antipodeB, values)
+    
+    print("centralPoint: "+str(centralPoint))
     values.remove(centralPoint)
     retList = [centralPoint]
     if len(values) > 1:
@@ -143,6 +146,16 @@ def getClosestTo(point, values):
             minDistance = dis
             closestPoint = value
     return closestPoint
+
+def getInBetween(pointA, pointB, values):
+  minDistance = distance(values[0], pointA)**2+distance(values[0], pointB)**2
+  closestPoint = values[0]
+  for value in values[1:]:
+      dis = distance(value, pointA)**2+distance(value, pointB)**2
+      if (dis < minDistance):
+          minDistance = dis
+          closestPoint = value
+  return closestPoint
     
 def getMeanPoint(values):
     point = [0] * len(values[0])
