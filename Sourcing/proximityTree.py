@@ -29,7 +29,7 @@ class ProximityTree:
         else:
             self.right.insert(node)
     def print(self, tab = 0):
-        print("  "*tab + "- "+str(self.value))
+        print("  "*tab + "- "+(self.value.toString()))
         if self.left != None:
             self.left.print(tab+1)
         if self.right != None:
@@ -83,23 +83,18 @@ def printCSV(vec):
     print(vec.toString())
     
 def distance(A, B):
-    sqSum = 0
-    for (a,b) in zip(A,B):
-        sqSum = (a-b)**2
-    return math.sqrt(sqSum)
+  return A.getDistanceTo(B)
     
 def balanceOrderProxTree(values):
     # print("balancing "+str(values))
     if len(values) == 0:
         return []
-    meanPoint = getMeanPoint(values)
     centralPoint = values[0]
-    for _ in range(0,10):
-      antipodeA = getFarthestFrom(centralPoint, values)
-      antipodeB = getFarthestFrom(antipodeA, values)
-      centralPoint = getInBetween(antipodeA, antipodeB, values)
+    antipodeA = getFarthestFrom(centralPoint, values)
+    antipodeB = getFarthestFrom(antipodeA, values)
+    centralPoint = getInBetween(antipodeA, antipodeB, values)
     
-    print("centralPoint: "+str(centralPoint))
+    #print("centralPoint: "+str(centralPoint))
     values.remove(centralPoint)
     retList = [centralPoint]
     if len(values) > 1:
@@ -180,11 +175,11 @@ def proximityPartition(antipodeA, antipodeB, values):
 
 
 def splitMax(tree):
-    dim = len(tree.value)
+    dim = tree.value.getDimension()
     oldArea = tree.range()**dim
     trees = tree.split()
     maxRangeTree = getMaxRangeTree(trees)
-    while True:
+    while maxRangeTree != None:
         oldArea = sumArea(trees, dim)
         splitTrees = maxRangeTree.split()
         if splitTrees == None:
@@ -215,6 +210,9 @@ def sumArea(trees, dim):
     return sum
 
 
+def getLocality(trees, dim):
+  return len(trees)*sumArea(trees,dim)
+
 def main():
 
     points = []
@@ -225,9 +223,11 @@ def main():
     balancedTree = ProximityTree.createTree(points)
     
     trees = splitMax(tree)
-    balancedTrees = splitMax(balancedTree)    
+    balancedTrees = splitMax(balancedTree)
     print("unbalanced tree | sum area: "+str(sumArea(trees,2))+" num trees: "+str(len(trees)))
     print("balanced tree   | sum area: "+str(sumArea(balancedTrees,2))+" num trees: "+str(len(balancedTrees)))
+
+
 
 
 if __name__ == "__main__":
