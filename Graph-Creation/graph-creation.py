@@ -1,6 +1,6 @@
-import sys, wikipedia, time
-import  pickle
-
+import sys, wikipedia, time, pickle
+import priorityQueue as pq
+import tree as tr
 
 # MINIMUM LINK FREQUENCY IN PAGE TO BE ADDED TO TREE
 CT_THRESH = 2
@@ -15,7 +15,10 @@ def main():
   global treeCache
   argv = sys.argv
 
-  treeCache = load_object("treeCache.pickle")
+  treeCache = {}
+  #load_object("treeCache.pickle")
+
+  print(sys.argv)
   
   if argv[1] == "add":
     keyword = ""
@@ -71,7 +74,7 @@ def save_object(obj, filename):
 
 def makeTreeBreadthFirst(name: str, count: int):
   global treeCache
-  nodeQueue = PriorityQueue([name])
+  nodeQueue = pq.PriorityQueue([name])
   i = 0
   initialText = wikipedia.page(name).content
   start_time = time.time()
@@ -122,7 +125,6 @@ def getLinks(pageName: str) -> [str]:
 
   return  filteredLinks
 
-  
 class Edge:
   def __init__(self, weight: float, target):
     self.weight = weight
@@ -153,34 +155,6 @@ class TreeNode:
     for edge in self.edges.links:
       edge.target.printI(depth+1)
 
-class PriorityQueueNode:
-  def __init__(self, obj, priority):
-    self.obj = obj
-    self.priority = priority
-
-# TODO: Make this a heap
-
-class PriorityQueue:
-  def __init__(self, contents):
-    self.contents = []
-    for contentNode in contents:
-      self.contents.append(PriorityQueueNode(contentNode, 100))
-  def toList(self):
-    return list(map(lambda node: node.obj, self.contents))
-  def length(self):
-    return len(self.contents)
-  def pop(self):
-      return self.contents.pop(0)
-  def priorityInsert(self, node, priority):
-    if priority == 0:
-      self.contents.append(PriorityQueueNode(node, priority))
-      return
-    for i in range(0, len(self.contents)):
-      queueNode = self.contents[i]
-      if queueNode.priority < priority:
-        self.contents.insert(i, PriorityQueueNode(node, priority))
-        return
-    self.contents.append(PriorityQueueNode(node, priority))
   
 if __name__ == "__main__":
   main()

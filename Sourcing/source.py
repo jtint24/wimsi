@@ -26,7 +26,7 @@ class Source:
   def getCredibilityScore(self):
     return 0
   def getDimension(self):
-    return 2
+    return 2 # This is some constant, could maybe be higher?
   def toString(self):
     return self.name
   
