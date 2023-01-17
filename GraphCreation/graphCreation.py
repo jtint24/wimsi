@@ -1,14 +1,21 @@
-import time, pickle
+import pickle
+import time
+import wikipediaapi
 from GraphCreation import priorityQueue as pq
 from GraphCreation import tree as tr
 
 # MINIMUM LINK FREQUENCY IN PAGE TO BE ADDED TO TREE
 CT_THRESH = 2
 
-
 # 1.28 seconds / node at 400
 # 1.29 seconds / node at 500
 # 1.35 seconds / node at 1000
+
+
+wikipedia = wikipediaapi.Wikipedia('en')
+
+pages = {}
+
 
 def search(name, treeCache):
     for pname in treeCache.keys():
@@ -30,41 +37,40 @@ def makeTreeBreadthFirst(name: str, count: int, treeCache):
     nodeQueue = pq.PriorityQueue([name])
     i = 0
 
-    initialText = wikipedia.page(name).content
+    initialText = getPage(name).text
     start_time = time.time()
     while i < count and not nodeQueue.length() == 0:
         popped = nodeQueue.pop()
         nameToMakeFrom = popped.obj
-        print(
-            "%d  #%s/%s:\t %s %s" % (time.time() - start_time, i, nodeQueue.length(), nameToMakeFrom, popped.priority))
+        print("%d #%s/%s:\t %s %s" % (time.time() - start_time, i, nodeQueue.length(), nameToMakeFrom, popped.priority))
+
+        page = getPage(nameToMakeFrom)
 
         links = getLinks(nameToMakeFrom)
 
-        if (not nameToMakeFrom in treeCache.keys()):
-            treeCache[nameToMakeFrom] = tr.TreeNode(nameToMakeFrom, [], wikipedia.summary(nameToMakeFrom, sentences=1),
-                                                    [], treeCache)
+        if nameToMakeFrom not in treeCache.keys():
+            treeCache[nameToMakeFrom] = tr.TreeNode(nameToMakeFrom, [], page, treeCache)
 
         for link in links:
-            if (not link.name in nodeQueue.toList()) and (not link.name in treeCache.keys()):
+            if (link.name not in nodeQueue.toList()) and (link.name not in treeCache.keys()):
                 nodeQueue.priorityInsert(link.name, initialText.count(link.name))
 
         for link in links:
-            if not link.name in treeCache.keys():
-                treeCache[link.name] = tr.TreeNode(link.name, [], wikipedia.summary(link.name, sentences=1), [],
-                                                   treeCache)
+            if link.name not in treeCache.keys():
+                treeCache[link.name] = tr.TreeNode(link.name, [], getPage(link.name), treeCache)
             treeCache[nameToMakeFrom].edges.append(tr.Edge(link.weight, treeCache[link.name]))
 
         i += 1
 
 
 def getLinks(pageName: str) -> [str]:
-    global thresh
+    global CT_THRESH
     try:
-        page = wikipedia.page(pageName)
+        page = getPage(pageName)
     except:
         return []
     links = list(set(page.links))
-    text = page.content
+    text = page.text
     filteredLinks = []
 
     # sort links by count and filter out uncommon ones
@@ -79,3 +85,9 @@ def getLinks(pageName: str) -> [str]:
     filteredLinks = list(map(lambda linkPair: tr.Link(linkPair[1], linkPair[0]), filteredLinks))
 
     return filteredLinks
+
+
+def getPage(name):
+    if name not in pages:
+        pages[name] = wikipedia.page(name)
+    return pages[name]

@@ -11,11 +11,10 @@ class Link:
 
 
 class TreeNode:
-    def __init__(self, name: str, edges, summary, sourceLinks, treeCache):
+    def __init__(self, name: str, edges, page, treeCache):
         self.name = name
         self.edges = edges
-        self.summary = summary
-        self.sourceLinks = sourceLinks
+        self.page = page
         treeCache[name] = self
 
     def print(self):
@@ -23,9 +22,9 @@ class TreeNode:
         for edge in self.edges:
             print("\t-" + edge.target.name)
 
-    def printSummary(self, w):
+    def printSummary(self):
         print(self.name)
-        print(self.summary)
+        print(self.page.summary)
         for edge in self.edges:
             print("\t-" + edge.target.name)
 
