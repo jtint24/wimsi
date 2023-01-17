@@ -1,16 +1,11 @@
-
-
 def filterTree(tree):
-  pass
+    pass
+
 
 def filterTrees(trees):
-  maxNumOfSources = 0
+    maxNumOfSources = 0
 
-  for tree in trees:
-    maxNumOfSources += tree.size()
+    for tree in trees:
+        maxNumOfSources += tree.size()
 
-  maxNumOfSources *= .1
-
-  
-
-  
+    maxNumOfSources *= .1
