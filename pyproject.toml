@@ -6,7 +6,6 @@ authors = ["Replit user <<>>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-wikipedia = "^1.4.0"
 
 [tool.poetry.dev-dependencies]
 

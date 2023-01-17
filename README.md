@@ -26,7 +26,7 @@ A tool to build Jotted maps for practically any topic. This includes grouped, co
 - [ ] Sourcing
   - [ ] Pull Sources from Topics
   - [ ] Write code to compare two sources for semantic similarity
-  - [ ] Develop algorithm for efficient grouping that minimizes number of groups while also minimizing maximum semantic difference within a group
+  - [x] Develop algorithm for efficient grouping that minimizes number of groups while also minimizing maximum semantic difference within a group
   - [ ] Develop heuristics list for evaluating source quality
   - [ ] Finish Source Filtering Algorithm
 - [ ] Summarization

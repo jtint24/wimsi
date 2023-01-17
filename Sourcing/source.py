@@ -13,9 +13,8 @@ class Source:
     intersectionSize = 0
 
     for keyword in self.keywords:
-      if not keyword in sourceB.keywords:
-        unionSize += self.keywords[keyword]
-      else:
+      unionSize += self.keywords[keyword]
+      if keyword in sourceB.keywords:
         intersectionSize += self.keywords[keyword] + sourceB.keywords[keyword]
     for keyword in sourceB.keywords:
       unionSize += sourceB.keywords[keyword]

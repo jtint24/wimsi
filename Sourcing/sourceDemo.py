@@ -7,7 +7,7 @@ def main():
   os.system('clear')
 
 
-  print("Welcome to source tree demo \n\n")
+  print("Welcome to the source tree demo \n\n")
   
   # Below is a list of example sources, collected from the wikipedia page for Python:
   
@@ -40,7 +40,7 @@ def main():
     sourceTree.print()
 
   print("")
-  print("Balanced Source Tree (Sources are split into a category on python history and a category on python Syntax and Derivatives 😁)")
+  print("Balanced Source Tree (Sources are split into a category on python for cybersecurity and a category on python syntax and history 😁)")
   for sourceTree in balancedSourceTrees:
     sourceTree.print()
 
@@ -52,7 +52,7 @@ def main():
 
   print("Balanced Proximity Tree Area: %f" % (proximityTree.sumArea(balancedSourceTrees, 2)))
 
-  # The balanced tree has slightly less, but it also has fewer subtrees. This is important as a smaller sum area is harder to achieve the fewer trees you have. Because of this, I like to compare the product of (number of trees * total area of trees), which is a statistic I call locality. Balanced trees have a much lower locality than unbalanced:
+  # The balanced tree has less, but it also has fewer subtrees. This is important as a smaller sum area is harder to achieve the fewer trees you have. Because of this, I like to compare the product of (number of trees * total area of trees), which is a statistic I call locality. Balanced trees have a much lower locality than unbalanced:
 
   print("\n")
   print("Unbalanced Trees Locality: %f" % proximityTree.getLocality(sourceTrees, 2))
@@ -109,6 +109,12 @@ def getSourceList():
       "Syntax": 4.0,
       "Programming": 3.2,
       "Python": 1.1
+    }),
+    source.Source("how to use python for mitm attacks","",{
+      "HTTP": 10.1,
+      "Cybersecurity": 5.5,
+      "Hacking": 4.2,
+      "Python": 3.7
     }),
   ]
 
