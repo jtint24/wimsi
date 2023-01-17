@@ -45,6 +45,7 @@ def makeTreeBreadthFirst(name: str, count: int, treeCache):
         print("%d #%s/%s:\t %s %s" % (time.time() - start_time, i, nodeQueue.length(), nameToMakeFrom, popped.priority))
 
         page = getPage(nameToMakeFrom)
+        nameToMakeFrom = page.title
 
         links = getLinks(nameToMakeFrom)
 
