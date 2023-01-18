@@ -19,7 +19,7 @@ pages = {}
 
 def search(name, treeCache):
     for pname in treeCache.keys():
-        if name in pname.lower():
+        if name.lower() in pname.lower():
             print(" - `" + pname + "`")
 
 
@@ -39,6 +39,7 @@ def makeTreeBreadthFirst(name: str, count: int, treeCache):
 
     initialText = getPage(name).text
     start_time = time.time()
+    print("time")
     while i < count and not nodeQueue.length() == 0:
         popped = nodeQueue.pop()
         nameToMakeFrom = popped.obj
@@ -62,6 +63,10 @@ def makeTreeBreadthFirst(name: str, count: int, treeCache):
             treeCache[nameToMakeFrom].edges.append(tr.Edge(link.weight, treeCache[link.name]))
 
         i += 1
+
+    end_time = time.time();
+
+    print(str(i)+" nodes done in "+str(end_time-start_time))
 
 
 def getLinks(pageName: str) -> [str]:

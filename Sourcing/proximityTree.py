@@ -10,7 +10,7 @@ class ProximityTree:
 
     def range(self):
         return self.sra
-
+    @staticmethod
     def createTree(values):
         newTree = ProximityTree(values[0])
         for node in values[1:]:
@@ -137,7 +137,7 @@ def getFarthestFrom(point, values):
     farthestPoint = values[0]
     for value in values[1:]:
         dis = distance(value, point)
-        if (distance(value, point) > maxDistance):
+        if distance(value, point) > maxDistance:
             maxDistance = dis
             farthestPoint = value
     return farthestPoint
@@ -148,7 +148,7 @@ def getClosestTo(point, values):
     closestPoint = values[0]
     for value in values[1:]:
         dis = distance(value, point)
-        if (distance(value, point) < minDistance):
+        if distance(value, point) < minDistance:
             minDistance = dis
             closestPoint = value
     return closestPoint
@@ -159,7 +159,7 @@ def getInBetween(pointA, pointB, values):
     closestPoint = values[0]
     for value in values[1:]:
         dis = distance(value, pointA) ** 2 + distance(value, pointB) ** 2
-        if (dis < minDistance):
+        if dis < minDistance:
             minDistance = dis
             closestPoint = value
     return closestPoint
@@ -179,7 +179,7 @@ def proximityPartition(antipodeA, antipodeB, values):
     closestToA = []
     closestToB = []
     for value in values:
-        if (distance(antipodeA, value) < distance(antipodeB, value)):
+        if distance(antipodeA, value) < distance(antipodeB, value):
             closestToA.append(value)
         else:
             closestToB.append(value)
@@ -192,10 +192,10 @@ def splitMax(tree):
     oldArea = tree.range() ** dim
     trees = tree.split()
     maxRangeTree = getMaxRangeTree(trees)
-    while maxRangeTree != None:
+    while maxRangeTree is not None:
         oldArea = sumArea(trees, dim)
         splitTrees = maxRangeTree.split()
-        if splitTrees == None:
+        if splitTrees is None:
             break
         for tree in trees:
             if tree != maxRangeTree:
