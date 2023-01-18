@@ -1,6 +1,7 @@
 import sys
 
 from GraphCreation import graphCreation as gc
+from MapExtraction import extractMap as em
 
 
 def main():
@@ -47,6 +48,21 @@ def main():
             if len(tree.edges) != 0:
                 nonBlankCount += 1
         print("number of trees: %s" % (nonBlankCount))
+    elif argv[1] == "extract":
+        keyword = ""
+        for i in range(2, len(argv)):
+            keyword += " " + argv[i]
+
+        keyword = keyword.strip()
+
+        if keyword not in treeCache:
+            print("can't find `" + keyword + "`")
+            print("searching for similar nodes...")
+            gc.search(keyword, treeCache)
+            exit(1)
+
+        mnode = em.extractMap(treeCache, keyword.strip())
+        mnode.toConsole()
 
     else:
         print("command not found, run: main.py <add|search|print|stats>")
