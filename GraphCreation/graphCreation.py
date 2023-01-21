@@ -62,6 +62,8 @@ def makeTreeBreadthFirst(name: str, count: int, treeCache):
 
         linksAdded = 0
         for link in links:
+            if link.name.startswith("File:") or link.name.startswith("Wikipedia:") or link.name.startswith("Help:") or link.name.startswith("Talk:") or link.name.startswith("Category:") or link.name.startswith("Template"):
+                continue
             if link.name not in treeCache.keys():
                 treeCache[link.name] = tr.TreeNode(link.name, [], getPage(link.name, treeCache), treeCache)
             treeCache[nameToMakeFrom].edges.append(tr.Edge(link.weight, treeCache[link.name]))

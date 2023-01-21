@@ -13,6 +13,7 @@ class MapNode:
     def fromTreeNode(tnode):
         sources = []
         for link in tnode.page.links:
+            print(link)
             sources.append(src.Source("sourceName", link, []))
         return MapNode(tnode.name, [], tnode.page.summary, sources, tnode.page.pageid)
 

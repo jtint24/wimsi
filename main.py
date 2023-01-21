@@ -1,5 +1,7 @@
 import sys
 
+import wikipediaapi
+
 from GraphCreation import graphCreation as gc
 from MapExtraction import extractMap as em
 
@@ -31,6 +33,7 @@ def main():
             keyword += " " + argv[i]
         keyword = keyword.strip()
         try:
+
             treeCache[keyword].printSummary()
         except:
             print("Can't find a page `" + keyword + "`")

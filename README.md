@@ -18,13 +18,13 @@ A tool to build Jotted maps for practically any topic. This includes grouped, co
 
 - [ ] Graph Creation
   - [x] Pull related Wikipedia articles
-  - [ ] Mirror articles that redirect to each other
+  - [x] Mirror articles that redirect to each other
   - [x] Construct graph using BFS of topics
 - [ ] Map Extraction
   - [x] Find discovery tree of graph
   - [ ] Enhance discovery time calculation with semantic similarity to root node
 - [ ] Sourcing
-  - [ ] Pull Sources from Topics
+  - [x] Pull Sources from Topics
   - [ ] Write code to compare two sources for semantic similarity
   - [x] Develop algorithm for efficient grouping that minimizes number of groups while also minimizing maximum semantic difference within a group
   - [ ] Develop heuristics list for evaluating source quality

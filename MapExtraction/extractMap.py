@@ -1,4 +1,5 @@
 import random
+import time
 
 from GraphCreation import priorityQueue as pq
 from MapExtraction import mapNode as mn
@@ -8,6 +9,9 @@ SIMILARITY_THRESH = .7
 
 def extractMap(treeCache, name):
     global SIMILARITY_THRESH
+
+    startTime = time.time()
+
 
     rootTNode = treeCache[name]
     rootMNode = mn.MapNode.fromTreeNode(rootTNode)
@@ -37,7 +41,11 @@ def extractMap(treeCache, name):
                 addedNodeIDs.append(tnodeToAdd.page.pageid)
 
                 nodeSize += 1
-    print("created " + str(nodeSize) + " nodes")
+
+    endTime = time.time()
+
+    print("created " + str(nodeSize) + " nodes in " + str(endTime-startTime)+" seconds")
+
     return rootMNode
 
 
