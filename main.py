@@ -63,6 +63,9 @@ def main():
 
         mnode = em.extractMap(treeCache, keyword.strip())
         mnode.toConsole()
+    elif argv[1] == "list":
+        for tree in treeCache:
+            print(treeCache[tree].name)
 
     else:
         print("command not found, run: main.py <add|search|print|stats>")
