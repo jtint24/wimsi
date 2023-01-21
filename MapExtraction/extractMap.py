@@ -34,7 +34,8 @@ def extractMap(treeCache, name):
                 mnodeToAdd = mn.MapNode.fromTreeNode(tnodeToAdd)
                 queue.priorityInsert((tnodeToAdd, mnodeToAdd), similarity)
                 mnode.relatedNodes.append(mnodeToAdd)
-                addedNodeIDs.append(rootTNode.page.pageid)
+                addedNodeIDs.append(tnodeToAdd.page.pageid)
+
                 nodeSize += 1
     print("created " + str(nodeSize) + " nodes")
     return rootMNode
