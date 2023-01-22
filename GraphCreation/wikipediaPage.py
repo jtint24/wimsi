@@ -11,9 +11,12 @@ class WikipediaPage:
         self.canonicalUrl = canonicalUrl
         self.accessTime = time.time()
 
-        r = requests.get("https://en.wikipedia.org/w/api.php?action=parse&page="+title+"&prop=externallinks&format=json")
-        r.raise_for_status()
-        self.references = r.json()["parse"]["externallinks"]
+        try:
+            r = requests.get("https://en.wikipedia.org/w/api.php?action=parse&page="+title+"&prop=externallinks&format=json")
+            r.raise_for_status()
+            self.references = r.json()["parse"]["externallinks"]
+        except:
+            self.references = []
 
 
     @staticmethod

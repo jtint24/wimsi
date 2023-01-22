@@ -12,7 +12,6 @@ def extractMap(treeCache, name):
 
     startTime = time.time()
 
-
     rootTNode = treeCache[name]
     rootMNode = mn.MapNode.fromTreeNode(rootTNode)
     queue = pq.PriorityQueue([(rootTNode, rootMNode)])
@@ -44,7 +43,7 @@ def extractMap(treeCache, name):
 
     endTime = time.time()
 
-    print("created " + str(nodeSize) + " nodes in " + str(endTime-startTime)+" seconds")
+    print("created " + str(nodeSize) + " nodes in " + str(endTime - startTime) + " seconds")
 
     return rootMNode
 
